@@ -8,6 +8,7 @@ import (
 
 func Initialize() {
 	env := flag.String("e", "dev", "env info")
+	//初始化日志
 	InitLogger()
 	//初始化配置
 	InitConfig(*env)
