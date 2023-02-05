@@ -29,5 +29,5 @@ func InitConfig(env string) {
 		panic(err)
 	}
 
-	Logger.Info("load config success")
+	Logger.Info("加载配置文件已完成")
 }

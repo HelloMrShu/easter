@@ -1,7 +1,7 @@
 package test
 
 import (
-	. "github.com/HelloMrShu/easter/global"
+	. "github.com/HelloMrShu/easter/componets"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
