@@ -1,7 +1,6 @@
-package initialize
+package global
 
 import (
-	. "code.sohuno.com/sky/robin/global"
 	"go.uber.org/zap"
 )
 

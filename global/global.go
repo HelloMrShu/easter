@@ -8,7 +8,7 @@ import (
 var (
 	ServerConfig Config
 	Logger       *zap.Logger
-	LiveDB       *gorm.DB
+	EasterDB     *gorm.DB
 )
 
 type MysqlConfig struct {

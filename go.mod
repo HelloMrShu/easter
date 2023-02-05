@@ -1,4 +1,4 @@
-module code.sohuno.com/sky/robin
+module github.com/HelloMrShu/easter
 
 go 1.19
 

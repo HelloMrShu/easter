@@ -1,13 +1,13 @@
 package router
 
 import (
-	"code.sohuno.com/sky/robin/controller/hello"
+	"github.com/HelloMrShu/easter/controller/test"
 	"github.com/gin-gonic/gin"
 )
 
 func InitRouter(router *gin.Engine) {
 	Api := router.Group("api")
 	{
-		Api.GET("/hello", hello.Say)
+		Api.GET("/test", test.Index)
 	}
 }

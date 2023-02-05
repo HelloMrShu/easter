@@ -1,13 +1,12 @@
-package initialize
+package global
 
 import (
-	. "code.sohuno.com/sky/robin/global"
 	"flag"
 	"fmt"
 	"github.com/spf13/viper"
 )
 
-func Init() {
+func Initialize() {
 	env := flag.String("e", "dev", "env info")
 	InitLogger()
 	//初始化配置
@@ -18,9 +17,11 @@ func Init() {
 
 func InitConfig(env string) {
 	fileName := fmt.Sprintf("config/%s.yaml", env)
+
 	v := viper.New()
 	v.SetConfigFile(fileName)
 	v.SetConfigType("yaml") //设置文件的类型
+
 	if err := v.ReadInConfig(); err != nil {
 		panic(err)
 	}
