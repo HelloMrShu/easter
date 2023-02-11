@@ -14,6 +14,7 @@ func Initialize() {
 	InitConfig(*env)
 	//初始化数据库
 	InitDB()
+	Logger.Info("start server successfully!")
 }
 
 func InitConfig(env string) {
@@ -30,5 +31,5 @@ func InitConfig(env string) {
 		panic(err)
 	}
 
-	Logger.Info("加载配置文件已完成")
+	Logger.Info("loading config successfully!")
 }
