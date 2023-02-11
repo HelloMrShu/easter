@@ -21,5 +21,12 @@ type MysqlConfig struct {
 }
 
 type Config struct {
-	Db MysqlConfig `yaml:"db"`
+	Db  MysqlConfig `yaml:"db"`
+	Log LogConfig   `yaml:"log"`
+}
+
+type LogConfig struct {
+	Path  string `yaml:"path"`
+	File  string `yaml:"file"`
+	Level string `yaml:"level"`
 }

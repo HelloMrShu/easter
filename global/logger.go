@@ -1,9 +1,10 @@
 package global
 
 import (
+	"fmt"
+	"github.com/natefinch/lumberjack"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"os"
 )
 
 func InitLogger() {
@@ -11,15 +12,24 @@ func InitLogger() {
 	encoder := getEncoder()
 
 	core := zapcore.NewCore(encoder, writer, zapcore.InfoLevel)
-	logger := zap.New(core, zap.AddCaller())
-	Logger = logger
+	Logger = zap.New(core, zap.AddCaller())
 }
 
 func getEncoder() zapcore.Encoder {
-	return zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig())
+	encoderConfig := zap.NewProductionEncoderConfig()
+	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+	encoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
+	return zapcore.NewConsoleEncoder(encoderConfig)
 }
 
 func getLogWriter() zapcore.WriteSyncer {
-	file, _ := os.Create("logs/app.log")
-	return zapcore.AddSync(file)
+	filename := fmt.Sprintf("%s/%s", ServerConfig.Log.Path, ServerConfig.Log.File)
+	lumberJackLogger := &lumberjack.Logger{
+		Filename:   filename,
+		MaxSize:    1,
+		MaxBackups: 5,
+		MaxAge:     30,
+		Compress:   false,
+	}
+	return zapcore.AddSync(lumberJackLogger)
 }

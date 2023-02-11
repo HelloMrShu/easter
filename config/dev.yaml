@@ -5,3 +5,7 @@ db:
   username: 'root'
   password: 'root'
   charset: 'utf8'
+log:
+  path: 'logs'
+  file: 'app.log'
+  level: 'info'
