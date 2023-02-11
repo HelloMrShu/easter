@@ -16,3 +16,4 @@
 
 # ide config file
 .idea
+.DS_Store

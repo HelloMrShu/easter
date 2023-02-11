@@ -20,6 +20,7 @@ func main() {
 
 	// 加载路由
 	engine := gin.New()
+	engine.Use(LoggerMiddleware(Logger), RecoveryMiddleware(Logger, false))
 	router.InitRouter(engine)
 
 	// 启动服务
