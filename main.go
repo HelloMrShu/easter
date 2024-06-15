@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	. "github.com/HelloMrShu/easter/global"
 	"github.com/HelloMrShu/easter/router"
@@ -15,37 +16,36 @@ import (
 )
 
 func main() {
-	// 初始化
+	// init
 	Initialize()
 
-	// 加载路由
+	// load router
 	engine := gin.New()
 	engine.Use(LoggerMiddleware(Logger), RecoveryMiddleware(Logger, false))
 	router.InitRouter(engine)
 
-	// 启动服务
+	// start
 	srv := &http.Server{
 		Addr:    ":8080",
 		Handler: engine,
 	}
 	go func() {
-		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			Logger.Error("服务启动失败", zap.String("error ", err.Error()))
+		if err := srv.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+			Logger.Error("server start failed", zap.String("error ", err.Error()))
 		}
 	}()
 
-	// 关闭服务器
+	// shutdown
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
 	<-quit
-	fmt.Println("\n开始关闭服务器 ...")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("关闭服务器异常:", err)
+		log.Fatal("shutdown failed:", err)
 	}
 
-	fmt.Println("服务器已关闭")
+	fmt.Println("shutdown success")
 }
