@@ -3,21 +3,29 @@ package main
 import (
 	"context"
 	"errors"
+	"flag"
 	"fmt"
 	. "github.com/HelloMrShu/easter/global"
 	"github.com/HelloMrShu/easter/router"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 )
 
+var (
+	env  string
+	port int
+)
+
 func main() {
-	// init
-	Initialize()
+	flag.StringVar(&env, "e", "dev", "env")
+	flag.IntVar(&port, "p", 8080, "port")
+
+	// initialize
+	Initialize(env)
 
 	// load router
 	engine := gin.New()
@@ -25,8 +33,9 @@ func main() {
 	router.InitRouter(engine)
 
 	// start
+	addr := fmt.Sprintf("%s:%v", "", port)
 	srv := &http.Server{
-		Addr:    ":8080",
+		Addr:    addr,
 		Handler: engine,
 	}
 	go func() {
@@ -44,8 +53,6 @@ func main() {
 	defer cancel()
 
 	if err := srv.Shutdown(ctx); err != nil {
-		log.Fatal("shutdown failed:", err)
+		Logger.Fatal("shutdown failed:" + err.Error())
 	}
-
-	fmt.Println("shutdown success")
 }

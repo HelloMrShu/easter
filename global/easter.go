@@ -1,20 +1,17 @@
 package global
 
 import (
-	"flag"
 	"fmt"
 	"github.com/spf13/viper"
 )
 
-func Initialize() {
-	env := flag.String("e", "dev", "env info")
+func Initialize(env string) {
 	// init config
-	InitConfig(*env)
+	InitConfig(env)
 	// init log
 	InitLogger()
 	// init db
 	//InitDB()
-	Logger.Info("start server successfully!")
 }
 
 func InitConfig(env string) {
