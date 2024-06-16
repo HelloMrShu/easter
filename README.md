@@ -1,5 +1,5 @@
 # Go Micro Web Framework
-<hr/>
+
 Easter is a web framework written in Go and Gin. It features a API. If you need performance and good productivity, you will love it.
 <br/>
 Easter's key features are well encapsulated:<br/>
@@ -12,16 +12,13 @@ Easter's key features are well encapsulated:<br/>
 - db
 
 # Getting started
-<hr/>
 
 ## install
-
 ```
 go mod tidy
 ```
 
 ## running
-
 ```
 go run main.go -e dev -p 8080
 ```
