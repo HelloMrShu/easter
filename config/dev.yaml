@@ -1,9 +1,9 @@
 db:
   host: 'localhost'
-  port: '3306'
+  port: 3306
   database: 'test'
   username: 'root'
-  password: 'root'
+  password: 'root123'
   charset: 'utf8'
 log:
   path: 'logs'

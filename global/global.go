@@ -13,7 +13,7 @@ var (
 
 type MysqlConfig struct {
 	Host     string `yaml:"host"`
-	Port     string `yaml:"port"`
+	Port     int    `yaml:"port"`
 	Password string `yaml:"password"`
 	Database string `yaml:"database"`
 	Username string `yaml:"username"`
